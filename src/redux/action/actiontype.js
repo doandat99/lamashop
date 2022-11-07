@@ -1,0 +1,11 @@
+export const ADD_TO_CART = "ADD_TO_CART";
+
+export const REMOVE_PRODUCT_TO_CART = " REMOVE_PRODUCT_TO_CART";
+
+export const INCREASE_PRODUCT = " INCREASE_PRODUCT ";
+
+export const DECREASE_PRODUCT = " DECREASE_PRODUCT ";
+
+export const SIGNUP_REQUEST = "users/SIGNUP_REQUEST";
+
+export const SIGNIN_REQUEST = "users/SIGNIN_REQUEST";

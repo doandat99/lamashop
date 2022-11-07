@@ -1,0 +1,8 @@
+@import "toastr";
+a {
+  text-decoration: none;
+  color: #000;
+}
+* {
+  scroll-behavior: smooth;
+}

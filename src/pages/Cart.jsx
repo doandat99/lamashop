@@ -9,6 +9,7 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { cartSlice } from "../redux/reducer/cart";
 import { NavLink } from "react-router-dom";
 import { pathapp } from "../constant/path";
+import { mobile, tablet } from "../reponsive";
 
 const Container = styled.div`
   flex-grow: 1;
@@ -17,7 +18,7 @@ const Container = styled.div`
 
 const Table = styled.div`
   margin: 5rem auto;
-  width: 80vw;
+  width: 90vw;
 `;
 
 const RowTitle = styled.div`
@@ -26,6 +27,7 @@ const RowTitle = styled.div`
   background-color: #f7f7f7;
   padding: 1rem 2rem;
   border-radius: 5px;
+  ${mobile({ gridTemplateColumns: "5fr 2fr 3fr 2fr 1fr" })}
 `;
 
 const Col = styled.div``;
@@ -34,6 +36,7 @@ const Title = styled.p`
   font-size: 1.25rem;
   text-transform: uppercase;
   text-align: center;
+  margin-right: 1rem;
 `;
 const DataTable = styled.div`
   margin: 2rem 0;
@@ -46,6 +49,7 @@ const Product = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
+  ${mobile({ gridTemplateColumns: "5fr 2fr 3fr 2fr 1fr" })}
 `;
 
 const Img = styled.img`
@@ -62,12 +66,21 @@ const Quanntity = styled.div``;
 const Buttons = styled.button`
   padding: 0.25rem 0.5rem;
   margin: 0 0.2rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  ${tablet({ fontSize: "1.5rem" })};
+  ${mobile({ fontSize: "1rem" })};
 `;
 
 const Input = styled.input`
   padding: 0.25rem 0.5rem;
   width: 1rem;
   text-align: center;
+  border: none;
+  ${tablet({ fontSize: "1rem" })};
+  ${mobile({ fontSize: "1rem" })};
 `;
 
 const TableFooter = styled.div`
@@ -168,11 +181,8 @@ const Cart = () => {
           ))}
         </DataTable>
 
-        {cart.length === 0 ? (
-          ""
-        ) : (
+        {cart.length ? (
           <TableFooter>
-            {" "}
             <Total>
               <TotalItem>Total Item: {cart.length}</TotalItem>
               <TotalItem>Total Cart: $ {total.toFixed(2)}</TotalItem>
@@ -184,7 +194,7 @@ const Cart = () => {
               </Button>
             </NavLink>
           </TableFooter>
-        )}
+        ) : null}
       </Table>
     </Container>
   );

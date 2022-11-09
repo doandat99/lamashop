@@ -22,3 +22,12 @@ input::-webkit-inner-spin-button {
 .Content {
   flex-grow: 1;
 }
+@media (max-width: 425px) {
+  html {
+    font-size: 11px;
+  }
+  .MuiBadge-root .MuiBadge-badge {
+    height: 15px;
+    min-width: 10px;
+  }
+}

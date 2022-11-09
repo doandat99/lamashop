@@ -7,7 +7,9 @@ import Rating from "@material-ui/lab/Rating";
 import { Skeleton } from "@material-ui/lab";
 import { useDispatch } from "react-redux";
 import { cartSlice } from "../../redux/reducer/cart";
-import { pathcart } from "../../constant/path";
+import { pathapp } from "../../constant/path";
+import { mobile, tablet } from "../../reponsive";
+import { Button } from "@material-ui/core";
 
 const Container = styled.div`
   width: 90vw;
@@ -17,6 +19,14 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 90vw;
   display: flex;
+  ${tablet({
+    flexWrap: "wrap ",
+    justifyContent: "center",
+  })}
+  ${mobile({
+    flexWrap: "wrap ",
+    justifyContent: "center",
+  })}
 `;
 
 const Box = styled.div`
@@ -29,6 +39,16 @@ const Box = styled.div`
 const Img = styled.img`
   width: 500px;
   height: 600px;
+  ${tablet({
+    width: "300px",
+    height: "400px",
+    marginBottom: "1rem",
+  })}
+  ${mobile({
+    width: "200px",
+    height: "300px",
+    marginBottom: "5px",
+  })}
 `;
 
 const Category = styled.h1`
@@ -38,6 +58,7 @@ const Category = styled.h1`
 
 const Title = styled.h3`
   font-size: 2rem;
+  padding-bottom: 5px;
 `;
 
 const Text = styled.p`
@@ -46,23 +67,33 @@ const Text = styled.p`
   &::first-letter {
     text-transform: capitalize;
   }
+  padding-bottom: 1rem;
 `;
 
 const BoxRating = styled.div`
   display: flex;
   align-items: center;
+  padding-bottom: 5px;
 `;
 
 const Number = styled.p`
   margin-right: 0.5rem;
+  padding-bottom: 5px;
 `;
 
 const Price = styled.span`
   font-size: 2rem;
+  padding-bottom: 5px;
 `;
 
 const ButtonList = styled.div`
   display: flex;
+  ${tablet({
+    marginBottom: "1rem",
+  })}
+  ${mobile({
+    marginBottom: "5px",
+  })}
 `;
 
 const ButtonItem = styled.button`
@@ -72,14 +103,20 @@ const ButtonItem = styled.button`
   margin-left: 0.75rem;
   cursor: pointer;
   padding: 0.25rem 0.75rem;
+  background-color: #fff;
+  border: 1px solid rgba(63, 81, 181, 0.68);
+  border-radius: 2px;
 `;
 
 const Input = styled.input`
-  width: 3rem;
+  width: 2rem;
   text-align: center;
   &:focus {
     outline: none;
   }
+`;
+const Padding = styled.div`
+  padding-left: 1rem;
 `;
 
 const SingleProduct = () => {
@@ -172,16 +209,22 @@ const SingleProduct = () => {
             </ButtonItem>
           </ButtonList>
           <ButtonList>
-            <ButtonItem onClick={handleChageQuantity}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleChageQuantity}
+            >
               Add to cart
               <AddShoppingCart />
-            </ButtonItem>
-            <NavLink to={pathcart.url}>
-              <ButtonItem>
-                Go to cart
-                <ShoppingCart />
-              </ButtonItem>
-            </NavLink>
+            </Button>
+            <Padding>
+              <NavLink to={pathapp.cart}>
+                <Button variant="outlined" color="primary">
+                  Go to cart
+                  <ShoppingCart />
+                </Button>
+              </NavLink>
+            </Padding>
           </ButtonList>
         </Box>
       </Wrapper>

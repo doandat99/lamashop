@@ -11,6 +11,7 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    textAlign: "center",
   },
   title: {
     fontSize: "4rem",

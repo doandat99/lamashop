@@ -27,6 +27,7 @@ const WrapperClient = Wrapper;
 const Section = styled.section`
   background-image: url("https://mobirise.com/bootstrap-template/about-us-page-template/assets/images/mitch-rosen-188054-2000x1125.jpg");
   width: 100vw;
+  min-width: 100%;
   height: 15rem;
   background-position: 50% 50%;
   background-size: cover;
@@ -35,7 +36,7 @@ const Section = styled.section`
 
 const ListIcon = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-top: 3rem;
 `;
 

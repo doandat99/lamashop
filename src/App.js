@@ -10,7 +10,7 @@ import DetailProduct from "./components/DetailProduct/DetailProduct";
 import Announcenment from "./components/Announcenment/Announcenment";
 import Footer from "./components/Footer/Footer";
 import Signup from "./pages/Signup";
-import { pathapp, pathproduct } from "./constant/path";
+import { pathapp } from "./constant/path";
 import { Checkout } from "./pages/Checkout";
 import { PaymentSuccess } from "./pages/PaymentSuccess";
 
@@ -27,7 +27,7 @@ const App = () => {
             <Route path={pathapp.cart} element={<Cart />} />
             <Route path={pathapp.signin} element={<Signin />} />
             <Route path={pathapp.products} element={<Products />} />
-            <Route path={pathproduct.ProducId} element={<DetailProduct />} />
+            <Route path={pathapp.productId} element={<DetailProduct />} />
             <Route path={pathapp.signup} element={<Signup />} />
             <Route path={pathapp.checkout} element={<Checkout />} />
             <Route

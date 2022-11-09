@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { get } from "../api/product";
 import Product from "../components/Products/Product";
 import Button from "@material-ui/core/Button";
+import { mobile, tablet } from "../reponsive";
 
 const Title = styled.div`
   font-size: 2rem;
@@ -37,10 +38,18 @@ const Container = styled.div`
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
   row-gap: 3rem;
+  ${tablet({ gridTemplateColumns: "auto auto" })}
+  ${mobile({ gridTemplateColumns: "auto auto" })}
 `;
 const Box = styled.div`
   text-align: center;
   margin-bottom: 3rem;
+`;
+const Banner = styled.div`
+  width: 100%;
+`;
+const Img = styled.img`
+  width: 100%;
 `;
 
 const Home = () => {
@@ -91,12 +100,12 @@ const Home = () => {
 
   return (
     <div className="Homepages">
-      <div className="banner">
-        <img
+      <Banner>
+        <Img
           src="https://images.vexels.com/media/users/3/194731/raw/98a06d45de142b379f6d236526aa9ada-shop-online-web-slider-design.jpg"
           alt="banner"
         />
-      </div>
+      </Banner>
       <Title>Lastet Product</Title>
       <Container>
         {slice.map((product) => (

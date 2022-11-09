@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { get } from "../../api/product";
+import { mobile, tablet } from "../../reponsive";
+
 import Product from "./Product";
 
 const Container = styled.div`
@@ -11,12 +13,8 @@ const Container = styled.div`
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
   row-gap: 3rem;
-  @media (max-width: 768px) {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
-    row-gap: 2rem;
-  }
+  ${tablet({ gridTemplateColumns: "auto auto" })}
+  ${mobile({ gridTemplateColumns: "auto auto" })}
 `;
 
 const Toast = styled.p`

@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { pathproduct } from "../../constant/path";
+import { pathapp } from "../../constant/path";
+import { mobile, tablet } from "../../reponsive";
 
 const Item = styled.div`
   width: 350px;
@@ -13,6 +14,8 @@ const Item = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.23);
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
+  ${tablet({ width: "300px", height: "400px" })}
+  ${mobile({ width: "150px", height: "200px" })}
 `;
 
 const Img = styled.img`
@@ -20,6 +23,8 @@ const Img = styled.img`
   height: 350px;
   margin-bottom: 0.25rem;
   border: none;
+  ${tablet({ width: "200px", height: "300px" })}
+  ${mobile({ width: "90px", height: "140px" })}
 `;
 const Title = styled.h3`
   font-weight: bold;
@@ -36,7 +41,7 @@ const Detail = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 0.5rem;
-  font-size: 14px;
+  font-size: 1rem;
   background-color: #a8a5a5;
   color: #111111;
   &:hover {
@@ -53,7 +58,7 @@ const Product = ({ id, title, price, image }) => {
         <Img src={image} />
         <Title>{title.substring(0, 12)}</Title>
         <Price>$ {price}</Price>
-        <NavLink to={pathproduct.Product + id}>
+        <NavLink to={pathapp.products + id}>
           <Detail>Detail</Detail>
         </NavLink>
       </Item>

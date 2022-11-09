@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.1rem;
 `;

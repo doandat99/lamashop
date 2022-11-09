@@ -5,17 +5,11 @@ export const path = [
   { name: "Signin", url: "/signin" },
 ];
 
-export const pathproduct = {
-  ProducId: `/products/:id`,
-  Product: `/products/`,
-};
-
-export const pathcart = { name: "Cart", url: "/cart" };
-
 export const pathapp = {
   home: "/",
   about: "/about",
-  products: "/products",
+  products: `/products/`,
+  productId: `/products/:id`,
   signin: "/signin",
   cart: "/cart",
   signup: "/signup",

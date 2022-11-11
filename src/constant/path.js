@@ -13,6 +13,7 @@ export const pathapp = {
   signin: "/signin",
   cart: "/cart",
   signup: "/signup",
+  delivery: "/delivery",
   checkout: "/checkout",
   checkout_success: "/checkout/success",
 };

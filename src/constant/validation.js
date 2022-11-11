@@ -53,3 +53,18 @@ export const contactSchema = Yup.object({
 
   messages: Yup.string().required("Invalid message"),
 });
+
+export const deliverySchema = Yup.object({
+  name: Yup.string()
+    .required("Invalid name")
+    .min(5, "You name must be least 5 charagers")
+    .max(20, "You name must be under 20 charagers"),
+
+  phone: Yup.string()
+    .required("Invalid phonenumber")
+    .matches(regexPhone, "Must be a valid phone number"),
+
+  province: Yup.string().required("Invalid province"),
+
+  location: Yup.string().required("Invalid location"),
+});

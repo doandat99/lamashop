@@ -9,7 +9,7 @@ import {
 } from "@material-ui/icons";
 import { pathapp } from "../../constant/path";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   sidebar: {
     width: "20rem",
   },
@@ -36,7 +36,9 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
   const handleClick = () => {
     setIsOpen(false);
   };
+
   const classes = useStyles();
+
   return (
     <Drawer anchor="left" open={isOpen} onClose={handleClick}>
       <Box className={classes.sidebar}>

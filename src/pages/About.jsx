@@ -228,7 +228,6 @@ const About = () => {
               />
             </Box>
             <Box>
-              {" "}
               <TextField
                 id="phone"
                 name="phone"

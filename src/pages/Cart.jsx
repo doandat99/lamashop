@@ -187,7 +187,7 @@ const Cart = () => {
               <TotalItem>Total Item: {cart.length}</TotalItem>
               <TotalItem>Total Cart: $ {total.toFixed(2)}</TotalItem>
             </Total>
-            <NavLink to={pathapp.checkout}>
+            <NavLink to={pathapp.delivery}>
               <Button variant="contained" color="primary">
                 Check out
                 <CheckCircleOutlineIcon />

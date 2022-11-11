@@ -53,7 +53,7 @@ const Img = styled.img`
 `;
 
 const Home = () => {
-  // giới hạn số  sản phẩm lấy ra
+  // Limited number of products taken out
   const [limit, setLimit] = useState(8);
 
   const [data, setData] = useState([]);
@@ -62,7 +62,7 @@ const Home = () => {
 
   const [error, setError] = useState("");
 
-  //Lấy từ phẩn từ đầu tiên đến vị trí giới hạn
+  //Take from the first word part to the limit position
   const slice = data.slice(0, limit);
 
   useEffect(() => {
@@ -89,11 +89,11 @@ const Home = () => {
   if (loading) {
     return <Toast>....Loading</Toast>;
   }
-  // Check api bị lỗi
+  // Check api error
   if (error) {
     return <Toast>....Have Errors</Toast>;
   }
-  // Check data rỗng
+  // Check data null
   if (data.length === 0) {
     return <Toast>....Data not define</Toast>;
   }
@@ -119,16 +119,14 @@ const Home = () => {
         ))}
       </Container>
       {
-        // Check data còn sản phẩm thì hiện loadmore, nếu không còn sản phẩm nào thì không cho hiện thị loadmore
-        data.length - limit === 0 ? (
-          ""
-        ) : (
+        // Check loadmore, if data > 0 show button , else show null
+        data.length - limit > 0 ? (
           <Box>
             <Button variant="contained" color="primary" onClick={LoadMore}>
               Load more
             </Button>
           </Box>
-        )
+        ) : null
       }
     </div>
   );

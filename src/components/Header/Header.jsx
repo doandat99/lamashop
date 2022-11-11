@@ -58,7 +58,10 @@ const Menu = styled.div`
 `;
 
 export const Header = () => {
+  //selector
   const cart = useSelector(cartSelector);
+
+  // state
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {
     setIsOpen(true);
@@ -74,7 +77,9 @@ export const Header = () => {
         </Menu>
 
         <Left>
-          <Logo>LAMA.</Logo>
+          <NavLink to="/">
+            <Logo>LAMA.</Logo>
+          </NavLink>
         </Left>
         <Center>
           {path.map((item, index) => (

@@ -24,6 +24,16 @@ const useStyle = makeStyles((theme) => ({
     borderRadius: "4px",
     border: "none",
   },
+  container: {
+    width: "50%",
+    margin: "6rem auto",
+    "@media (max-width:768px)": {
+      width: "90%",
+    },
+    "@media (max-width:425px)": {
+      width: "80%",
+    },
+  },
 }));
 
 export const CheckoutForm = () => {
@@ -90,18 +100,24 @@ export const CheckoutForm = () => {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
-      <button
-        disabled={isLoading || !stripe || !elements}
-        id="submit"
-        className={classes.button}
-      >
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+    <div className={classes.container}>
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <PaymentElement id="payment-element" />
+        <button
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+          className={classes.button}
+        >
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {message && <div id="payment-message">{message}</div>}
+      </form>
+    </div>
   );
 };

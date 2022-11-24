@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { get } from "../api/product";
 import Product from "../components/Products/Product";
 import Button from "@material-ui/core/Button";
-import { mobile, tablet } from "../reponsive";
+import { mobile, tablet, laptop } from "../reponsive";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Title = styled.div`
   font-size: 2rem;
@@ -23,10 +24,9 @@ const Title = styled.div`
   }
 `;
 
-const Toast = styled.p`
+const Toast = styled.div`
   font-size: 2rem;
   text-align: center;
-  height: 100vh;
   margin: 20rem auto;
 `;
 
@@ -38,6 +38,7 @@ const Container = styled.div`
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
   row-gap: 3rem;
+  ${laptop({ gridTemplateColumns: "auto auto" })}
   ${tablet({ gridTemplateColumns: "auto auto" })}
   ${mobile({ gridTemplateColumns: "auto auto" })}
 `;
@@ -87,7 +88,11 @@ const Home = () => {
 
   // Check Loading data
   if (loading) {
-    return <Toast>....Loading</Toast>;
+    return (
+      <Toast>
+        <CircularProgress disableShrink />
+      </Toast>
+    );
   }
   // Check api error
   if (error) {

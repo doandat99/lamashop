@@ -8,8 +8,7 @@ import { cartSelector } from "../../redux/selector";
 import { path, pathapp } from "../../constant/path";
 import { mobile, tablet } from "../../reponsive";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Sidebar } from "../Sidebar/Sidebar";
-import { useState } from "react";
+import { SwipeableTemporaryDrawer } from "../Sidebar/Sidebar";
 
 const Container = styled.div`
   width: 100%;
@@ -57,21 +56,32 @@ const Menu = styled.div`
   ${mobile({ display: "block" })}
 `;
 
-export const Header = () => {
+const Header = () => {
   //selector
   const cart = useSelector(cartSelector);
 
   // state
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClick = () => {
-    setIsOpen(true);
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
   };
 
   return (
     <Container>
       <Wrapper>
         <Menu>
-          <IconButton onClick={handleClick}>
+          <IconButton onClick={toggleDrawer("left", true)}>
             <MenuIcon />
           </IconButton>
         </Menu>
@@ -102,7 +112,8 @@ export const Header = () => {
           </MenuItem>
         </Right>
       </Wrapper>
-      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer} />
     </Container>
   );
 };
+export default Header;

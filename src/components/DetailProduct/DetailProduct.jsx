@@ -10,6 +10,7 @@ import { cartSlice } from "../../redux/reducer/cart";
 import { pathapp } from "../../constant/path";
 import { mobile, tablet } from "../../reponsive";
 import { Button } from "@material-ui/core";
+import toastr from "toastr";
 
 const Container = styled.div`
   width: 90vw;
@@ -145,6 +146,7 @@ const SingleProduct = () => {
   const handleChageQuantity = () => {
     setQuantity(quantity);
     dispatch(cartSlice.actions.addToCart({ ...productData, quantity }));
+    toastr.success("Add product is success");
   };
 
   const Loading = () => {

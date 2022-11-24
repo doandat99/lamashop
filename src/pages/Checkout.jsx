@@ -5,7 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE);
 
-export const Checkout = () => {
+const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   const appearance = {
@@ -35,3 +35,4 @@ export const Checkout = () => {
     </>
   );
 };
+export default Checkout;

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import imagelink from "../assets/img";
 import { useFormik } from "formik";
 import { contactSchema } from "../constant/validation";
+import { mobile, tablet } from "../reponsive";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +15,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 50vw;
   margin: 0 auto;
-  padding: 0 1rem;
+  ${tablet({ width: "85vw" })}
+  ${mobile({ width: "80vw" })}
 `;
 
 const ContainerClient = styled(Container)`

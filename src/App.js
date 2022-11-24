@@ -1,13 +1,13 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { Header } from "./components/Header/Header";
-import Announcenment from "./components/Announcenment/Announcenment";
-import Footer from "./components/Footer/Footer";
-import { Delivery } from "./pages/Delivery";
-import { Checkout } from "./pages/Checkout";
 import { pathapp } from "./constant/path";
-import { PaymentSuccess } from "./pages/PaymentSuccess";
+import DefaultLayout from "./layouts/DefaultLayout/DefaultLayout";
+import AdminLayout from "./layouts/Admin/AdminLayout";
+import Dashboard from "./layouts/Admin/pages/Dashboard";
+import AdminProduct from "./layouts/Admin/pages/AdminProduct";
+import AdminUser from "./layouts/Admin/pages/AdminUser";
+
 //React lazy
 
 const Home = lazy(() => import("./pages/Home"));
@@ -25,35 +25,42 @@ const DetailProduct = lazy(() =>
 );
 const Signup = lazy(() => import("./pages/Signup"));
 
+const Delivery = lazy(() => import("./pages/Delivery"));
+
+const Checkout = lazy(() => import("./pages/Checkout"));
+
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
+
 //
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Announcenment />
-        <Header />
-        <div className="Content">
-          <Suspense fallback={<div>Loading....</div>}>
-            <Routes>
-              <Route path={pathapp.home} element={<Home />} />
-              <Route path={pathapp.about} element={<About />} />
-              <Route path={pathapp.cart} element={<Cart />} />
-              <Route path={pathapp.signin} element={<Signin />} />
-              <Route path={pathapp.products} element={<Products />} />
-              <Route path={pathapp.productId} element={<DetailProduct />} />
-              <Route path={pathapp.signup} element={<Signup />} />
-              <Route path={pathapp.delivery} element={<Delivery />} />
-              <Route path={pathapp.checkout} element={<Checkout />} />
-              <Route
-                path={pathapp.checkout_success}
-                element={<PaymentSuccess />}
-              />
-            </Routes>
-          </Suspense>
-        </div>
-        <Footer />
-      </div>
+      <Suspense>
+        <Routes>
+          <Route element={<DefaultLayout />}>
+            <Route index element={<Home />} />
+            <Route path={pathapp.about} element={<About />} />
+            <Route path={pathapp.cart} element={<Cart />} />
+            <Route path={pathapp.signin} element={<Signin />} />
+            <Route path={pathapp.products} element={<Products />} />
+            <Route path={pathapp.productId} element={<DetailProduct />} />
+            <Route path={pathapp.signup} element={<Signup />} />
+            <Route path={pathapp.delivery} element={<Delivery />} />
+            <Route path={pathapp.checkout} element={<Checkout />} />
+            <Route
+              path={pathapp.checkout_success}
+              element={<PaymentSuccess />}
+            />
+          </Route>
+          <Route element={<AdminLayout />}>
+            <Route index element={<Navigate to={pathapp.admin} />} />
+            <Route path={pathapp.admin} element={<Dashboard />} />
+            <Route path={pathapp.adminproduct} element={<AdminProduct />} />
+            <Route path={pathapp.adminuser} element={<AdminUser />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { pathapp } from "../../constant/path";
-import { mobile, tablet } from "../../reponsive";
+import { mobile, tablet, laptop } from "../../reponsive";
 
 const Item = styled.div`
   width: 350px;
@@ -11,9 +11,13 @@ const Item = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: space-around;
   border: 1px solid rgba(0, 0, 0, 0.23);
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  ${laptop({ width: "400px", height: "500px" })}
   ${tablet({ width: "300px", height: "400px" })}
   ${mobile({ width: "150px", height: "200px" })}
 `;
@@ -34,35 +38,16 @@ const Title = styled.h3`
 const Price = styled.span`
   margin-bottom: 0.75rem;
 `;
-const Detail = styled.button`
-  width: 6rem;
-  padding: 0.5rem;
-  margin: 0 auto;
-  border: none;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  background-color: #a8a5a5;
-  color: #111111;
-  &:hover {
-    background-color: #111111;
-    color: #fff;
-    transition: all 0.5s ease-in-out;
-  }
-`;
 
 const Product = ({ id, title, price, image }) => {
   return (
-    <div>
+    <NavLink to={pathapp.products + id}>
       <Item>
         <Img src={image} />
         <Title>{title.substring(0, 12)}</Title>
         <Price>$ {price}</Price>
-        <NavLink to={pathapp.products + id}>
-          <Detail>Detail</Detail>
-        </NavLink>
       </Item>
-    </div>
+    </NavLink>
   );
 };
 

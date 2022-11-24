@@ -22,7 +22,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export const PaymentSuccess = () => {
+const PaymentSuccess = () => {
   const classes = useStyle();
 
   return (
@@ -40,3 +40,4 @@ export const PaymentSuccess = () => {
     </div>
   );
 };
+export default PaymentSuccess;

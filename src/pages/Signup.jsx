@@ -28,23 +28,35 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const useStyle = makeStyles((theme) => ({
   layout: {
     width: "25vw",
-    margin: "10rem auto",
+    margin: "5rem auto",
     justifyContent: "center",
     padding: "3rem 2rem",
     borderRadius: 5,
     border: "1px solid rgba(0,0,0,0.23)",
     boxShadow: "5px 5px 5px 5px rgba(0,0,0,0.23)",
-    "@media (max-width:390px)": {
-      width: "85vw",
-      border: "none",
-      boxShadow: "none",
-      padding: "0 0",
-    },
-    "@media (max-width:820px)": {
+    [theme.breakpoints.down("md")]: {
       width: "85vw",
       border: "none",
       boxShadow: "none",
     },
+    [theme.breakpoints.between("md", "lg")]: {
+      width: "70vw",
+    },
+
+    // "@media (max-width:1024px)": {
+    //   width: "70vw",
+    // },
+    // "@media (max-width:425px)": {
+    //   width: "85vw",
+    //   border: "none",
+    //   boxShadow: "none",
+    //   padding: "0 0",
+    // },
+    // "@media (max-width:768px)": {
+    //   width: "85vw",
+    //   border: "none",
+    //   boxShadow: "none",
+    // },
   },
   item: {
     display: "flex",

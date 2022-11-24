@@ -6,17 +6,21 @@ import { cartSelector } from "../redux/selector";
 
 import DeliveryForm from "../components/Delivery/DeliveryForm";
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles((theme) => ({
   container: {
-    width: "80vw",
+    width: "90vw",
     display: "flex",
     margin: "3rem auto",
     justifyContent: "space-between",
-    "@media (max-width:768px)": {
+    [theme.breakpoints.only("sm")]: {
       flexDirection: "column",
       alignItems: "center",
     },
-    "@media (max-width:425px)": {
+
+    [theme.breakpoints.only("md")]: {
+      width: "90vw",
+    },
+    [theme.breakpoints.only("xs")]: {
       flexDirection: "column",
       alignItems: "center",
     },
@@ -26,25 +30,25 @@ const useStyle = makeStyles(() => ({
     height: "6rem",
   },
   form: {
-    width: "40rem",
-    "@media (max-width:768px)": {
-      width: "100%",
-      paddingTop: "2rem",
+    width: "49rem",
+
+    [theme.breakpoints.up("md")]: {
+      width: "44vw",
     },
-    "@media (max-width:425px)": {
+    [theme.breakpoints.down("sm")]: {
       width: "100%",
       paddingTop: "2rem",
     },
   },
   product: {
-    width: "35rem",
+    width: "43rem",
     fontSize: "1.2rem",
     border: "1px solid rgba(0,0,0,0.2)",
     borderRadius: "5px",
-    "@media (max-width:425px)": {
-      width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "44vw",
     },
-    "@media (max-width:768px)": {
+    [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
   },
@@ -74,9 +78,12 @@ const useStyle = makeStyles(() => ({
     alignItems: "center",
   },
   total: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "5fr 1.3fr",
     padding: "1rem",
+    [theme.breakpoints.up("md")]: {
+      gridTemplateColumns: "5fr 1.2fr",
+    },
   },
   text: {
     textAlign: "center",
@@ -86,7 +93,7 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-export const Delivery = () => {
+const Delivery = () => {
   const classes = useStyle();
 
   const cart = useSelector(cartSelector);
@@ -138,3 +145,4 @@ export const Delivery = () => {
     </>
   );
 };
+export default Delivery;

@@ -85,16 +85,28 @@ const Input = styled.input`
 
 const TableFooter = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: end;
 `;
 
-const Total = styled.div``;
+const Total = styled.div`
+  padding-bottom: 1rem;
+`;
 
 const TotalItem = styled.p`
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+`;
+
+const Error = styled.p`
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 10rem;
+`;
+
+const Checkout = styled.div`
+  padding-right: 1rem;
 `;
 
 const Cart = () => {
@@ -108,94 +120,106 @@ const Cart = () => {
 
   return (
     <Container>
-      <Table>
-        <RowTitle>
-          <Col>
-            <Title>Product</Title>
-          </Col>
-          <Col>
-            <Title>Price</Title>
-          </Col>
-          <Col>
-            <Title>Quantity</Title>
-          </Col>
-          <Col>
-            <Title>Total</Title>
-          </Col>
-        </RowTitle>
-        <DataTable>
-          {cart.map((product) => (
-            <Product key={product.id}>
+      {cart.length > 0 ? (
+        <React.Fragment>
+          <Table>
+            <RowTitle>
               <Col>
-                <Img src={product.image} />
-                <Text> {product.title}</Text>
+                <Title>Product</Title>
               </Col>
               <Col>
-                <Price> $ {product.price}</Price>
+                <Title>Price</Title>
               </Col>
               <Col>
-                <Quanntity>
-                  <Buttons
-                    onClick={() => {
-                      if (product.quantity === 1) {
+                <Title>Quantity</Title>
+              </Col>
+              <Col>
+                <Title>Total</Title>
+              </Col>
+            </RowTitle>
+            <DataTable>
+              {cart.map((product) => (
+                <Product key={product.id}>
+                  <Col>
+                    <Img src={product.image} />
+                    <Text> {product.title}</Text>
+                  </Col>
+                  <Col>
+                    <Price> $ {product.price}</Price>
+                  </Col>
+                  <Col>
+                    <Quanntity>
+                      <Buttons
+                        onClick={() => {
+                          if (product.quantity === 1) {
+                            dispatch(
+                              cartSlice.actions.removeProductToCart(product.id)
+                            );
+                          } else {
+                            dispatch(
+                              cartSlice.actions.decreaseProductToCart(
+                                product.id
+                              )
+                            );
+                          }
+                        }}
+                      >
+                        -
+                      </Buttons>
+                      <Input
+                        type="number"
+                        value={product.quantity}
+                        onChange={(e) => e.target.value}
+                      />
+                      <Buttons
+                        onClick={() =>
+                          dispatch(
+                            cartSlice.actions.increaseProductToCart(product.id)
+                          )
+                        }
+                      >
+                        +
+                      </Buttons>
+                    </Quanntity>
+                  </Col>
+                  <Col>$ {(product.quantity * product.price).toFixed(2)}</Col>
+                  <Col>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => {
                         dispatch(
                           cartSlice.actions.removeProductToCart(product.id)
                         );
-                      } else {
-                        dispatch(
-                          cartSlice.actions.decreaseProductToCart(product.id)
-                        );
-                      }
-                    }}
-                  >
-                    -
-                  </Buttons>
-                  <Input
-                    type="number"
-                    value={product.quantity}
-                    onChange={(e) => e.target.value}
-                  />
-                  <Buttons
-                    onClick={() =>
-                      dispatch(
-                        cartSlice.actions.increaseProductToCart(product.id)
-                      )
-                    }
-                  >
-                    +
-                  </Buttons>
-                </Quanntity>
-              </Col>
-              <Col>$ {(product.quantity * product.price).toFixed(2)}</Col>
-              <Col>
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => {
-                    dispatch(cartSlice.actions.removeProductToCart(product.id));
-                  }}
-                >
-                  <DeleteIcon fontSize="large" />
-                </IconButton>
-              </Col>
-            </Product>
-          ))}
-        </DataTable>
+                      }}
+                    >
+                      <DeleteIcon fontSize="large" />
+                    </IconButton>
+                  </Col>
+                </Product>
+              ))}
+            </DataTable>
 
-        {cart.length ? (
-          <TableFooter>
-            <Total>
-              <TotalItem>Total Item: {cart.length}</TotalItem>
-              <TotalItem>Total Cart: $ {total.toFixed(2)}</TotalItem>
-            </Total>
-            <NavLink to={pathapp.delivery}>
-              <Button variant="contained" color="primary">
-                Check out
-                <CheckCircleOutlineIcon />
-              </Button>
-            </NavLink>
-          </TableFooter>
-        ) : null}
-      </Table>
+            {cart.length ? (
+              <TableFooter>
+                <Total>
+                  <TotalItem>Total Item: {cart.length}</TotalItem>
+                  <TotalItem>Total Cart:$ {total.toFixed(2)}</TotalItem>
+                </Total>
+                <Checkout>
+                  <NavLink to={pathapp.delivery}>
+                    <Button variant="contained" color="primary">
+                      Check out
+                      <CheckCircleOutlineIcon />
+                    </Button>
+                  </NavLink>
+                </Checkout>
+              </TableFooter>
+            ) : null}
+          </Table>
+        </React.Fragment>
+      ) : (
+        <Error>No Data ...!</Error>
+      )}
     </Container>
   );
 };

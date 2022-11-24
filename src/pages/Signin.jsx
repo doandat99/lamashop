@@ -30,11 +30,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20px",
     border: "1px solid rgba(0,0,0,0.23)",
     boxShadow: "5px 5px 5px 5px rgba(0,0,0,0.23)",
-    "@media (max-width:768px)": {
+    [theme.breakpoints.down("md")]: {
       border: "none",
       boxShadow: "none",
+      padding: "0 0",
+      width: "40rem",
     },
-    "@media (max-width:390px)": {
+    [theme.breakpoints.only("xs")]: {
       width: "30rem",
       border: "none",
       boxShadow: "none",
@@ -50,7 +52,10 @@ const useStyles = makeStyles((theme) => ({
   item: {
     display: "flex",
     flexDirection: "column",
-    padding: "2rem 3rem",
+    padding: "2rem ",
+    "@media(max-width:1024px)": {
+      padding: "1rem 2rem",
+    },
     "@media(max-width:390px)": {
       padding: "0 0",
       marginTop: "2rem",

@@ -16,4 +16,8 @@ export const pathapp = {
   delivery: "/delivery",
   checkout: "/checkout",
   checkout_success: "/checkout/success",
+  admin: "/admin",
+  dashboard: "/dashboard",
+  adminproduct: "/adminproduct",
+  adminuser: "/adminuser",
 };

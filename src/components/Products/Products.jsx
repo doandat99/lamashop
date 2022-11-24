@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { get } from "../../api/product";
-import { mobile, tablet } from "../../reponsive";
-
+import { mobile, tablet, laptop } from "../../reponsive";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Product from "./Product";
 
 const Container = styled.div`
@@ -13,11 +13,12 @@ const Container = styled.div`
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
   row-gap: 3rem;
+  ${laptop({ gridTemplateColumns: "auto auto " })}
   ${tablet({ gridTemplateColumns: "auto auto" })}
   ${mobile({ gridTemplateColumns: "auto auto" })}
 `;
 
-const Toast = styled.p`
+const Message = styled.div`
   font-size: 2rem;
   text-align: center;
   height: 100vh;
@@ -49,15 +50,19 @@ const Products = () => {
 
   // Check Loading data
   if (loading) {
-    return <Toast>....Loading</Toast>;
+    return (
+      <Message>
+        <CircularProgress disableShrink />
+      </Message>
+    );
   }
   // Check api bị lỗi
   if (error) {
-    return <Toast>....Have Errors</Toast>;
+    return <Message>....Have Errors</Message>;
   }
   // Check data rỗng
   if (data.length === 0) {
-    return <Toast>....Data not define</Toast>;
+    return <Message>....Data not define</Message>;
   }
 
   return (

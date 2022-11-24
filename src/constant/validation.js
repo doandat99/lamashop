@@ -68,3 +68,34 @@ export const deliverySchema = Yup.object({
 
   location: Yup.string().required("Invalid location"),
 });
+
+export const addProductSchema = Yup.object({
+  title: Yup.string()
+    .required("Invalid name")
+    .min(5, "You name must be least 5 charagers")
+    .max(20, "You name must be under 20 charagers"),
+  image: Yup.mixed().required("Required....!"),
+
+  price: Yup.number().required("Invalid price"),
+
+  category: Yup.string().required("Invalid category"),
+
+  description: Yup.string().required("Invalid description"),
+
+  quantity: Yup.number().required("Invalid quantity"),
+});
+
+export const updateProductSchema = Yup.object({
+  title: Yup.string()
+    .required("Invalid name")
+    .min(5, "You name must be least 5 charagers")
+    .max(20, "You name must be under 20 charagers"),
+
+  price: Yup.number().required("Invalid price"),
+
+  category: Yup.string().required("Invalid category"),
+
+  description: Yup.string().required("Invalid description"),
+
+  quantity: Yup.number().required("Invalid quantity"),
+});

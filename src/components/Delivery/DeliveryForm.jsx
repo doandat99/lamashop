@@ -41,7 +41,7 @@ const DeliveryForm = () => {
   }, []);
 
   const fecthProvince = async () => {
-    const { data } = await axios.get("https://vapi.vnappmob.com/api/province");
+    const { data } = await axios.get(process.env.REACT_APP_PROVINCE_API);
     setProvince(data.results);
   };
 

@@ -1,6 +1,13 @@
 import React from "react";
-import { Box, Drawer, makeStyles, Typography } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { Box, Typography } from "@material-ui/core";
 import {
   Home,
   Person,
@@ -8,70 +15,94 @@ import {
   BusinessCenter,
 } from "@material-ui/icons";
 import { pathapp } from "../../constant/path";
+import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
-  sidebar: {
-    width: "20rem",
+const useStyles = makeStyles({
+  list: {
+    width: 350,
   },
-  title: {
-    fontSize: "2rem",
-    textAlign: "center",
-    fontWeight: "bold",
-    padding: "2rem ",
+  fullList: {
+    width: "auto",
   },
   item: {
-    display: "flex",
-    justifyItems: "center",
-    alignItems: "center",
-    fontSize: "1.5rem",
-    borderBottom: "1px solid rgba(0,0,0,0.2)",
-    padding: "1rem 0 1rem 1rem",
+    fontSize: "2rem",
   },
-  padding: {
-    paddingLeft: "1rem",
+  title: {
+    textAlign: "center",
+    padding: "1rem 2rem",
   },
-}));
+});
 
-export const Sidebar = ({ isOpen, setIsOpen }) => {
-  const handleClick = () => {
-    setIsOpen(false);
-  };
-
+export const SwipeableTemporaryDrawer = ({ state, toggleDrawer }) => {
   const classes = useStyles();
 
-  return (
-    <Drawer anchor="left" open={isOpen} onClose={handleClick}>
+  const navigate = useNavigate();
+
+  const silde = [
+    {
+      name: "Home",
+      icon: <Home className={classes.item} />,
+      path: pathapp.home,
+      onClick: () => navigate("/"),
+    },
+    {
+      name: "Product",
+      icon: <BusinessCenter className={classes.item} />,
+      path: pathapp.products,
+      onClick: () => navigate("/products"),
+    },
+    {
+      name: "About",
+      icon: <ImportContacts className={classes.item} />,
+      path: pathapp.about,
+      onClick: () => navigate("/about"),
+    },
+    {
+      name: "Signin",
+      icon: <Person className={classes.item} />,
+      path: pathapp.signin,
+      onClick: () => navigate("/signin"),
+    },
+  ];
+
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={() => toggleDrawer(anchor, false)}
+      onKeyDown={() => toggleDrawer(anchor, false)}
+    >
       <Box className={classes.sidebar}>
         <Typography className={classes.title} variant="h5" component="div">
           LaMa Shop
         </Typography>
-        <div>
-          <div className={classes.item} onClick={handleClick}>
-            <Home />
-            <NavLink className={classes.padding} to={pathapp.home}>
-              Home
-            </NavLink>
-          </div>
-          <div className={classes.item} onClick={handleClick}>
-            <BusinessCenter />
-            <NavLink className={classes.padding} to={pathapp.products}>
-              Product
-            </NavLink>
-          </div>
-          <div className={classes.item} onClick={handleClick}>
-            <ImportContacts />
-            <NavLink className={classes.padding} to={pathapp.about}>
-              About
-            </NavLink>
-          </div>
-          <div className={classes.item} onClick={handleClick}>
-            <Person />
-            <NavLink className={classes.padding} to={pathapp.signin}>
-              Signin
-            </NavLink>
-          </div>
-        </div>
+        <List>
+          {silde.map((item, index) => (
+            <ListItem key={index} onClick={item.onClick}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItem>
+          ))}
+        </List>
       </Box>
-    </Drawer>
+      <Divider />
+    </div>
+  );
+
+  return (
+    <div>
+      <React.Fragment key={"left"}>
+        <SwipeableDrawer
+          anchor={"left"}
+          open={state["left"]}
+          onClose={() => toggleDrawer("left", false)}
+          onOpen={() => toggleDrawer("left", true)}
+        >
+          {list("left")}
+        </SwipeableDrawer>
+      </React.Fragment>
+    </div>
   );
 };

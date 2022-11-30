@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { pathapp } from "../../constant/path";
-import { mobile, tablet, laptop } from "../../reponsive";
+import { mobile, tablet, laptop, desktop } from "../../reponsive";
 
 const Item = styled.div`
   width: 350px;
@@ -17,9 +17,10 @@ const Item = styled.div`
   border-radius: 0.5rem;
   position: relative;
   cursor: pointer;
-  ${laptop({ width: "400px", height: "500px" })}
+  ${desktop({ width: "300px", height: "350px" })}
+  ${laptop({ width: "250px", height: "350px" })}
   ${tablet({ width: "300px", height: "400px" })}
-  ${mobile({ width: "150px", height: "200px" })}
+  ${mobile({ width: "150px", height: "250px" })}
 `;
 
 const Img = styled.img`
@@ -27,8 +28,10 @@ const Img = styled.img`
   height: 350px;
   margin-bottom: 0.25rem;
   border: none;
+  ${desktop({ width: "250px", height: "300px" })}
+  ${laptop({ width: "200px", height: "300px" })}
   ${tablet({ width: "200px", height: "300px" })}
-  ${mobile({ width: "90px", height: "140px" })}
+  ${mobile({ width: "100px", height: "200px" })}
 `;
 const Title = styled.h3`
   font-weight: bold;

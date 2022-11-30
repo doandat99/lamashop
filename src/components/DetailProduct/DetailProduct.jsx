@@ -35,6 +35,14 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin-left: 5rem;
+  ${tablet({
+    marginLeft: "0",
+    padding: "4rem",
+  })}
+  ${mobile({
+    marginLeft: "0",
+    padding: "1rem",
+  })}
 `;
 
 const Img = styled.img`
@@ -55,11 +63,23 @@ const Img = styled.img`
 const Category = styled.h1`
   text-transform: capitalize;
   color: #d1d2d3;
+  ${tablet({
+    paddingBottom: "1rem",
+  })}
+  ${mobile({
+    paddingBottom: "1rem",
+  })}
 `;
 
 const Title = styled.h3`
   font-size: 2rem;
   padding-bottom: 5px;
+  ${tablet({
+    paddingBottom: "1rem",
+  })}
+  ${mobile({
+    paddingBottom: "1rem",
+  })}
 `;
 
 const Text = styled.p`
@@ -69,12 +89,24 @@ const Text = styled.p`
     text-transform: capitalize;
   }
   padding-bottom: 1rem;
+  ${tablet({
+    paddingTop: "1rem",
+  })}
+  ${mobile({
+    paddingTop: "1rem",
+  })}
 `;
 
 const BoxRating = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 5px;
+  ${tablet({
+    paddingBottom: "1rem",
+  })}
+  ${mobile({
+    paddingBottom: "1rem",
+  })}
 `;
 
 const Number = styled.p`
@@ -85,6 +117,12 @@ const Number = styled.p`
 const Price = styled.span`
   font-size: 2rem;
   padding-bottom: 5px;
+  ${tablet({
+    paddingBottom: "1rem",
+  })}
+  ${mobile({
+    paddingBottom: "1rem",
+  })}
 `;
 
 const ButtonList = styled.div`

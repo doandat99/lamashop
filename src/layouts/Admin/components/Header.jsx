@@ -88,7 +88,7 @@ const MiniDrawer = () => {
     {
       text: "User",
       icon: <AccountCircle />,
-      path: pathapp.adminuser,
+      path: pathapp.admincategory,
     },
   ];
 

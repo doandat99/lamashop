@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import Announcenment from "../../components/Announcenment/Announcenment";
 import { Outlet } from "react-router-dom";
 import "../../App.css";
+
 const DefaultLayout = () => {
   return (
     <div className="App">

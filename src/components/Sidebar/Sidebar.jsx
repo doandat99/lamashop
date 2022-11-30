@@ -72,7 +72,6 @@ export const SwipeableTemporaryDrawer = ({ state, toggleDrawer }) => {
       })}
       role="presentation"
       onClick={() => toggleDrawer(anchor, false)}
-      onKeyDown={() => toggleDrawer(anchor, false)}
     >
       <Box className={classes.sidebar}>
         <Typography className={classes.title} variant="h5" component="div">
@@ -97,8 +96,8 @@ export const SwipeableTemporaryDrawer = ({ state, toggleDrawer }) => {
         <SwipeableDrawer
           anchor={"left"}
           open={state["left"]}
-          onClose={() => toggleDrawer("left", false)}
-          onOpen={() => toggleDrawer("left", true)}
+          onClose={toggleDrawer("left", false)}
+          onOpen={toggleDrawer("left", true)}
         >
           {list("left")}
         </SwipeableDrawer>

@@ -12,6 +12,7 @@ import {
   succeeded,
   validation_error,
 } from "../../utils/const";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyle = makeStyles((theme) => ({
   button: {
@@ -101,23 +102,29 @@ export const CheckoutForm = () => {
 
   return (
     <div className={classes.container}>
-      <form id="payment-form" onSubmit={handleSubmit}>
-        <PaymentElement id="payment-element" />
-        <button
-          disabled={isLoading || !stripe || !elements}
-          id="submit"
-          className={classes.button}
-        >
-          <span id="button-text">
-            {isLoading ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              "Pay now"
-            )}
-          </span>
-        </button>
-        {message && <div id="payment-message">{message}</div>}
-      </form>
+      {isLoading ? (
+        <form id="payment-form" onSubmit={handleSubmit}>
+          <PaymentElement id="payment-element" />
+          <button
+            disabled={isLoading || !stripe || !elements}
+            id="submit"
+            className={classes.button}
+          >
+            <span id="button-text">
+              {isLoading ? (
+                <div className="spinner" id="spinner">
+                  Loading....
+                </div>
+              ) : (
+                "Pay now"
+              )}
+            </span>
+          </button>
+          {message && <div id="payment-message">{message}</div>}
+        </form>
+      ) : (
+        <CircularProgress />
+      )}
     </div>
   );
 };

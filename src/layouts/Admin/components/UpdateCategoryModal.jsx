@@ -3,7 +3,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import Fade from "@material-ui/core/Fade";
 import Backdrop from "@material-ui/core/Backdrop";
-import UpdateForm from "./UpdateForm";
+import FormCategory from "./UpdateCategoryForm";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateModal = (props) => {
+const ModalCategory = (props) => {
   const classes = useStyles();
 
   return (
@@ -39,7 +39,7 @@ const UpdateModal = (props) => {
       >
         <Fade in={props.isOpen}>
           <div className={classes.paper}>
-            <UpdateForm
+            <FormCategory
               onClose={props.onClose}
               data={props.value.row}
               onOpen={props.onOpen}
@@ -52,4 +52,4 @@ const UpdateModal = (props) => {
   );
 };
 
-export default UpdateModal;
+export default ModalCategory;

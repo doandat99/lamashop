@@ -19,5 +19,5 @@ export const pathapp = {
   admin: "/admin",
   dashboard: "/dashboard",
   adminproduct: "/adminproduct",
-  adminuser: "/adminuser",
+  admincategory: "/admincategory",
 };

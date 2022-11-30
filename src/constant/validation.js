@@ -99,3 +99,17 @@ export const updateProductSchema = Yup.object({
 
   quantity: Yup.number().required("Invalid quantity"),
 });
+
+export const addCategorySchema = Yup.object({
+  name: Yup.string()
+    .required("Invalid name")
+    .min(5, "You name must be least 5 charagers")
+    .max(50, "You name must be under 20 charagers"),
+});
+
+export const editCategorySchema = Yup.object({
+  title: Yup.string()
+    .required("Invalid name")
+    .min(5, "You name must be least 5 charagers")
+    .max(50, "You name must be under 20 charagers"),
+});

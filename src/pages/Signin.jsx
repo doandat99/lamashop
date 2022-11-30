@@ -24,20 +24,24 @@ import { signin } from "../redux/redux-thunk/usersSlice";
 const useStyles = makeStyles((theme) => ({
   layout: {
     display: "flex",
-    margin: "10rem auto",
+    margin: "7rem auto",
     width: "40rem",
     padding: "3rem 4rem",
     borderRadius: "20px",
     border: "1px solid rgba(0,0,0,0.23)",
     boxShadow: "5px 5px 5px 5px rgba(0,0,0,0.23)",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       border: "none",
-      boxShadow: "none",
+      width: "40rem",
       padding: "0 0",
+      boxShadow: "none",
+    },
+    [theme.breakpoints.up("md")]: {
+      border: "none",
       width: "40rem",
     },
     [theme.breakpoints.only("xs")]: {
-      width: "30rem",
+      width: "25rem",
       border: "none",
       boxShadow: "none",
       margin: "5rem auto 0",
@@ -59,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
     "@media(max-width:390px)": {
       padding: "0 0",
       marginTop: "2rem",
+      marginBottom: "2rem",
     },
   },
   form: {
@@ -91,7 +96,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Signin = () => {
+  const [show, setShow] = useState(false);
+
   const dispatch = useDispatch();
+
+  const classes = useStyles();
 
   const formik = useFormik({
     initialValues: {
@@ -103,10 +112,6 @@ const Signin = () => {
       dispatch(signin(values));
     },
   });
-
-  const classes = useStyles();
-
-  const [show, setShow] = useState(false);
 
   const hanldeChange = () => {
     setShow(!show);

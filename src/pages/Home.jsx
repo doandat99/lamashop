@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { get } from "../api/product";
 import Product from "../components/Products/Product";
 import Button from "@material-ui/core/Button";
-import { mobile, tablet, laptop } from "../reponsive";
+import { mobile, tablet, laptop, desktop } from "../reponsive";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Title = styled.div`
@@ -38,7 +38,8 @@ const Container = styled.div`
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
   row-gap: 3rem;
-  ${laptop({ gridTemplateColumns: "auto auto" })}
+  ${desktop({ gridTemplateColumns: "auto auto auto auto", rowGap: "2rem" })}
+  ${laptop({ gridTemplateColumns: "auto auto auto" })}
   ${tablet({ gridTemplateColumns: "auto auto" })}
   ${mobile({ gridTemplateColumns: "auto auto" })}
 `;

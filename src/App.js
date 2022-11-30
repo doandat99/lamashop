@@ -6,7 +6,7 @@ import DefaultLayout from "./layouts/DefaultLayout/DefaultLayout";
 import AdminLayout from "./layouts/Admin/AdminLayout";
 import Dashboard from "./layouts/Admin/pages/Dashboard";
 import AdminProduct from "./layouts/Admin/pages/AdminProduct";
-import AdminUser from "./layouts/Admin/pages/AdminUser";
+import AdminCategory from "./layouts/Admin/pages/AdminCategory";
 
 //React lazy
 
@@ -57,7 +57,7 @@ const App = () => {
             <Route index element={<Navigate to={pathapp.admin} />} />
             <Route path={pathapp.admin} element={<Dashboard />} />
             <Route path={pathapp.adminproduct} element={<AdminProduct />} />
-            <Route path={pathapp.adminuser} element={<AdminUser />} />
+            <Route path={pathapp.admincategory} element={<AdminCategory />} />
           </Route>
         </Routes>
       </Suspense>

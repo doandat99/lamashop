@@ -3,12 +3,17 @@ import { Badge, IconButton } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { cartSelector } from "../../redux/selector";
-import { path, pathapp } from "../../constant/path";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSelector, userSelector } from "../../redux/selector";
+import { pathapp } from "../../constant/path";
 import { mobile, tablet } from "../../reponsive";
 import MenuIcon from "@material-ui/icons/Menu";
 import { SwipeableTemporaryDrawer } from "../Sidebar/Sidebar";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { logout } from "../../redux/redux-thunk/usersSlice";
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +30,9 @@ const Wrapper = styled.div`
 `;
 
 const Center = styled.div`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${tablet({ display: "none" })}
   ${mobile({ display: "none" })}
 `;
@@ -45,25 +52,51 @@ const Logo = styled.p`
   font-weight: bold;
 `;
 
-const MenuItem = styled.span`
+const Menuitem = styled.div`
   margin-left: 1.25rem;
   cursor: pointer;
 `;
 
-const Menu = styled.div`
+const Menus = styled.div`
   display: none;
   ${tablet({ display: "block" })}
   ${mobile({ display: "block" })}
 `;
 
+const Item = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Header = () => {
   //selector
   const cart = useSelector(cartSelector);
+  const user = useSelector(userSelector);
 
   // state
   const [state, setState] = React.useState({
     left: false,
   });
+
+  const dispatch = useDispatch();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const position = user?.email.indexOf("@");
+  const name = user?.email.substring(0, position);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -80,11 +113,11 @@ const Header = () => {
   return (
     <Container>
       <Wrapper>
-        <Menu>
+        <Menus>
           <IconButton onClick={toggleDrawer("left", true)}>
             <MenuIcon />
           </IconButton>
-        </Menu>
+        </Menus>
 
         <Left>
           <NavLink to="/">
@@ -92,11 +125,46 @@ const Header = () => {
           </NavLink>
         </Left>
         <Center>
-          {path.map((item, index) => (
-            <MenuItem key={index}>
-              <NavLink to={item.url}>{item.name}</NavLink>
+          <Menuitem>
+            <NavLink to={pathapp.home}>Home</NavLink>
+          </Menuitem>
+          <Menuitem>
+            <NavLink to={pathapp.products}>Products</NavLink>
+          </Menuitem>
+          <Menuitem>
+            <NavLink to={pathapp.about}>About</NavLink>
+          </Menuitem>
+          {user ? (
+            <MenuItem>
+              <Item
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                {name || ""}
+                <AccountCircleIcon />
+              </Item>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
             </MenuItem>
-          ))}
+          ) : (
+            <>
+              <Menuitem>
+                <NavLink to={pathapp.signin}>Signin</NavLink>
+              </Menuitem>
+              <Menuitem>
+                <NavLink to={pathapp.signup}>Register</NavLink>
+              </Menuitem>
+            </>
+          )}
         </Center>
         <Right>
           <MenuItem>

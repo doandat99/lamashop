@@ -3,10 +3,13 @@ import axios from "axios";
 import { CheckoutForm } from "../components/CheckoutForm/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE);
 
 const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");
+  const [loading, setLoading] = useState(null);
 
   const appearance = {
     theme: "stripe",
@@ -22,9 +25,33 @@ const Checkout = () => {
   }, []);
 
   const fetchStripe = async () => {
-    const res = await axios.post(process.env.REACT_APP_STRIPE_API);
-    setClientSecret(res.data.clientSecret);
+    setLoading();
+    try {
+      const res = await axios.post(process.env.REACT_APP_STRIPE_API);
+      setClientSecret(res.data.clientSecret);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "85vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress disableShrink />
+      </div>
+    );
+  }
+
   return (
     <>
       {clientSecret && (

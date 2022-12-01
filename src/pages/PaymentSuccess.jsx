@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles, Button } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { pathapp } from "../constant/path";
+import { cartSlice } from "../redux/reducer/cart";
+import { useDispatch } from "react-redux";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -24,6 +26,17 @@ const useStyle = makeStyles((theme) => ({
 
 const PaymentSuccess = () => {
   const classes = useStyle();
+
+  const [status] = useSearchParams();
+  const dispatch = useDispatch();
+
+  const statusCheckout = status.get("redirect_status");
+
+  useEffect(() => {
+    if (statusCheckout === "succeeded") {
+      dispatch(cartSlice.actions.clearCart());
+    }
+  }, [statusCheckout, dispatch]);
 
   return (
     <div className={classes.container}>

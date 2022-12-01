@@ -22,7 +22,7 @@ import {
 } from "@material-ui/icons";
 import { signupSchema } from "../constant/validation";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const useStyle = makeStyles((theme) => ({
@@ -61,6 +61,7 @@ const Signup = () => {
   const [show, setShow] = useState(false);
   const [confirm_password, setConfirm] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChangePassWord = () => {
     setShow(!show);
@@ -83,6 +84,7 @@ const Signup = () => {
 
     onSubmit: (values) => {
       dispatch(signup(values));
+      navigate("/signin");
     },
   });
 

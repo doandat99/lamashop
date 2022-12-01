@@ -15,25 +15,19 @@ export const signin = createAsyncThunk(SIGNIN_REQUEST, async (data) => {
   return await signInWithEmailAndPassword(auth, data.email, data.password);
 });
 
-const usersSlice = createSlice({
-  name: "users",
+const userSlice = createSlice({
+  name: "user",
   initialState: {
     loading: false,
     user: null,
     error: null,
   },
+  reducers: {
+    logout: (state) => console.log((state.user = null)),
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(signup.pending, (state, action) => {
-        state.loading = "loading";
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.user = action.meta.arg;
-        toastr.success(`${action.payload.user.email} signup success`);
-      })
-      .addCase(signup.rejected, (state, action) => {
-        toastr.error("Email is valid");
-      })
+
       .addCase(signin.pending, (state, action) => {
         state.loading = "loading";
       })
@@ -43,8 +37,20 @@ const usersSlice = createSlice({
       })
       .addCase(signin.rejected, (state, action) => {
         toastr.error("Email not found");
+      })
+      .addCase(signup.pending, (state, action) => {
+        state.loading = "loading";
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        state.user = action.meta.arg;
+        toastr.success(`${action.payload.user.email} signup success`);
+      })
+      .addCase(signup.rejected, (state, action) => {
+        toastr.error("Email is valid");
       });
   },
 });
 
-export default usersSlice;
+export const { logout } = userSlice.actions;
+
+export { userSlice };
